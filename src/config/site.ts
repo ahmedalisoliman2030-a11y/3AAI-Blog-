@@ -1,6 +1,6 @@
 export const siteConfig = {
-  title: 'مدونتي الاحترافية',
-  description: 'مدونة عربية احترافية تقدم محتوى متنوع وقيم',
+  title: '3AAI || Blog',
+  description: 'مدونة تقنية متخصصة في الذكاء الاصطناعي والتطوير البرمجي',
   url: 'https://myblog.com',
   author: {
     name: 'اسم الكاتب',
@@ -9,9 +9,9 @@ export const siteConfig = {
     email: 'author@myblog.com',
   },
   logo: {
-    src: '/images/logo.svg',
-    alt: 'شعار المدونة',
-    text: 'مدونتي',
+    src: '/logo.png',
+    alt: 'شعار 3AAI Blog',
+    text: '3AAI || Blog',
   },
   social: [
     { platform: 'twitter', url: 'https://twitter.com/myblog', icon: 'twitter' },

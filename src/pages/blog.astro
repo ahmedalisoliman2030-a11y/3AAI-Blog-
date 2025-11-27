@@ -1,27 +1,27 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
 import SearchIsland from "../components/react/SearchIsland.jsx";
 
 const allPosts = await getCollection("blog");
-const publishedPosts = allPosts.filter(post => !post.data.draft);
+const publishedPosts = allPosts.filter((post) => !post.data.draft);
 
 // Prepare posts with body content for search
-const postsWithBody = publishedPosts.map(post => ({
+const postsWithBody = publishedPosts.map((post) => ({
   slug: post.slug,
   data: post.data,
-  body: post.body
+  body: post.body,
 }));
 ---
 
-<BaseLayout title="المدونة" description="جميع المقالات المنشورة">
+<MainLayout title="المدونة" description="جميع المقالات المنشورة">
   <div class="container">
     <h1>المدونة</h1>
     <p class="subtitle">جميع المقالات المنشورة</p>
 
     <SearchIsland posts={postsWithBody} client:load />
   </div>
-</BaseLayout>
+</MainLayout>
 
 <style>
   .container {
@@ -29,13 +29,13 @@ const postsWithBody = publishedPosts.map(post => ({
     margin: 0 auto;
     padding: 2rem;
   }
-  
+
   h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
   }
-  
+
   .subtitle {
     color: var(--text-secondary);
     margin-bottom: 2rem;

@@ -1,5 +1,5 @@
 ---
-import { siteConfig } from '../config/site';
+import { siteConfig } from "../config/site";
 
 const currentPath = Astro.url.pathname;
 ---
@@ -9,31 +9,51 @@ const currentPath = Astro.url.pathname;
     <div class="header-content">
       <!-- Logo -->
       <a href="/" class="logo">
-        {siteConfig.logo.src ? (
-          <img src={siteConfig.logo.src} alt={siteConfig.logo.alt} class="logo-image" />
-        ) : null}
+        {
+          siteConfig.logo.src ? (
+            <img
+              src={siteConfig.logo.src}
+              alt={siteConfig.logo.alt}
+              class="logo-image"
+            />
+          ) : null
+        }
         <span class="logo-text">{siteConfig.logo.text}</span>
       </a>
-      
+
       <!-- Navigation -->
       <nav class="nav">
         <ul class="nav-list">
-          {siteConfig.navigation.map((item) => (
-            <li class="nav-item">
-              <a 
-                href={item.href} 
-                class={`nav-link ${currentPath === item.href ? 'active' : ''}`}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {
+            siteConfig.navigation.map((item) => (
+              <li class="nav-item">
+                <a
+                  href={item.href}
+                  class={`nav-link ${currentPath === item.href ? "active" : ""}`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
-      
+
       <!-- Theme Toggle -->
-      <button id="theme-toggle" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
-        <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button
+        id="theme-toggle"
+        class="theme-toggle"
+        aria-label="تبديل الوضع الليلي/النهاري"
+      >
+        <svg
+          class="sun-icon"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
           <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -44,11 +64,19 @@ const currentPath = Astro.url.pathname;
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
-        <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          class="moon-icon"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </button>
-      
+
       <!-- Mobile Menu Toggle -->
       <button class="mobile-menu-toggle" aria-label="القائمة">
         <span></span>
@@ -66,9 +94,11 @@ const currentPath = Astro.url.pathname;
     position: sticky;
     top: 0;
     z-index: 100;
-    transition: background-color var(--transition-normal), border-color var(--transition-normal);
+    transition:
+      background-color var(--transition-normal),
+      border-color var(--transition-normal);
   }
-  
+
   .header-content {
     display: flex;
     align-items: center;
@@ -76,7 +106,7 @@ const currentPath = Astro.url.pathname;
     height: var(--header-height);
     gap: 2rem;
   }
-  
+
   /* Logo */
   .logo {
     display: flex;
@@ -88,33 +118,33 @@ const currentPath = Astro.url.pathname;
     text-decoration: none;
     transition: color var(--transition-fast);
   }
-  
+
   .logo:hover {
     color: var(--color-primary);
   }
-  
+
   .logo-image {
-    height: 40px;
+    height: 80px;
     width: auto;
   }
-  
+
   .logo-text {
     font-family: var(--font-primary);
   }
-  
+
   /* Navigation */
   .nav {
     flex: 1;
     display: flex;
     justify-content: center;
   }
-  
+
   .nav-list {
     display: flex;
     list-style: none;
     gap: 0.5rem;
   }
-  
+
   .nav-link {
     display: block;
     padding: 0.5rem 1rem;
@@ -123,17 +153,17 @@ const currentPath = Astro.url.pathname;
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
   }
-  
+
   .nav-link:hover {
     color: var(--color-primary);
     background-color: var(--color-surface-hover);
   }
-  
+
   .nav-link.active {
     color: var(--color-primary);
     background-color: var(--color-surface-hover);
   }
-  
+
   /* Theme Toggle */
   .theme-toggle {
     display: flex;
@@ -148,37 +178,39 @@ const currentPath = Astro.url.pathname;
     cursor: pointer;
     transition: all var(--transition-fast);
   }
-  
+
   .theme-toggle:hover {
     background-color: var(--color-border);
   }
-  
+
   .sun-icon,
   .moon-icon {
     position: absolute;
-    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    transition:
+      opacity var(--transition-fast),
+      transform var(--transition-fast);
   }
-  
-  [data-theme='light'] .sun-icon {
+
+  [data-theme="light"] .sun-icon {
     opacity: 1;
     transform: rotate(0deg);
   }
-  
-  [data-theme='light'] .moon-icon {
+
+  [data-theme="light"] .moon-icon {
     opacity: 0;
     transform: rotate(90deg);
   }
-  
-  [data-theme='dark'] .sun-icon {
+
+  [data-theme="dark"] .sun-icon {
     opacity: 0;
     transform: rotate(-90deg);
   }
-  
-  [data-theme='dark'] .moon-icon {
+
+  [data-theme="dark"] .moon-icon {
     opacity: 1;
     transform: rotate(0deg);
   }
-  
+
   /* Mobile Menu Toggle */
   .mobile-menu-toggle {
     display: none;
@@ -191,7 +223,7 @@ const currentPath = Astro.url.pathname;
     background-color: transparent;
     cursor: pointer;
   }
-  
+
   .mobile-menu-toggle span {
     display: block;
     width: 100%;
@@ -200,13 +232,13 @@ const currentPath = Astro.url.pathname;
     border-radius: 2px;
     transition: all var(--transition-fast);
   }
-  
+
   /* Responsive */
   @media (max-width: 768px) {
     .nav {
       display: none;
     }
-    
+
     .mobile-menu-toggle {
       display: flex;
     }
@@ -215,13 +247,13 @@ const currentPath = Astro.url.pathname;
 
 <script>
   // Mobile menu toggle
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  const nav = document.querySelector('.nav');
-  
+  const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+  const nav = document.querySelector(".nav");
+
   if (mobileMenuToggle && nav) {
-    mobileMenuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      mobileMenuToggle.classList.toggle('active');
+    mobileMenuToggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+      mobileMenuToggle.classList.toggle("active");
     });
   }
 </script>

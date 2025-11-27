@@ -1,42 +1,61 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
 import BlogCard from "../../components/BlogCard.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
-  const publishedPosts = allPosts.filter(post => !post.data.draft);
-  
-  const categories = [...new Set(publishedPosts.map(post => post.data.category).filter(Boolean))];
-  
-  return categories.map(category => ({
+  const publishedPosts = allPosts.filter((post) => !post.data.draft);
+
+  const categories = [
+    ...new Set(
+      publishedPosts.map((post) => post.data.category).filter(Boolean),
+    ),
+  ];
+
+  return categories.map((category) => ({
     params: { category },
     props: {
-      posts: publishedPosts.filter(post => post.data.category === category),
-      category
-    }
+      posts: publishedPosts.filter((post) => post.data.category === category),
+      category,
+    },
   }));
 }
 
 const { posts, category } = Astro.props;
 ---
 
-<BaseLayout title={`التصنيف: ${category}`} description={`جميع المقالات في تصنيف ${category}`}>
+<MainLayout
+  title={`التصنيف: ${category}`}
+  description={`جميع المقالات في تصنيف ${category}`}
+>
   <div class="container">
     <h1>التصنيف: {category}</h1>
     <p class="subtitle">عدد المقالات: {posts.length}</p>
-    
+
     <div class="posts-grid">
-      {posts.map(post => (
-        <BlogCard post={post} />
-      ))}
+      {
+        posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            author={post.data.author}
+            image={post.data.image}
+            category={post.data.category}
+            tags={post.data.tags}
+            slug={post.slug}
+            content={post.body}
+          />
+        ))
+      }
     </div>
-    
+
     <div class="back-link">
       <a href="/blog">← العودة إلى جميع المقالات</a>
     </div>
   </div>
-</BaseLayout>
+</MainLayout>
 
 <style>
   .container {
@@ -44,34 +63,34 @@ const { posts, category } = Astro.props;
     margin: 0 auto;
     padding: 2rem;
   }
-  
+
   h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
   }
-  
+
   .subtitle {
     color: var(--text-secondary);
     margin-bottom: 2rem;
   }
-  
+
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
   }
-  
+
   .back-link {
     margin-top: 2rem;
   }
-  
+
   .back-link a {
     color: var(--primary-color);
     text-decoration: none;
   }
-  
+
   .back-link a:hover {
     text-decoration: underline;
   }

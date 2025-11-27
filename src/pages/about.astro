@@ -1,8 +1,18 @@
 ---
-import Base from "../layouts/Base.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 ---
 
-<Base>
-  <h1>عن المدونة</h1>
-  <p>هذه مدونة تجريبية نبنيها خطوة بخطوة باستخدام Astro.</p>
-</Base>
+<MainLayout title="من نحن">
+  <div class="container">
+    <h1>عن المدونة</h1>
+    <p>هذه مدونة تجريبية نبنيها خطوة بخطوة باستخدام Astro.</p>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+</style>
