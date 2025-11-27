@@ -1,0 +1,18 @@
+---
+import Navbar from "../components/Navbar.astro";
+---
+
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>مدونتي مع Astro</title>
+  </head>
+
+  <body style="font-family: sans-serif; margin:0; padding:0;">
+    <Navbar />
+
+    <main style="padding: 20px;">
+      <slot />
+    </main>
+  </body>
+</html>

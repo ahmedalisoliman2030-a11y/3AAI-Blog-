@@ -1,0 +1,16 @@
+---
+const links = [
+  { name: "الرئيسية", url: "/" },
+  { name: "عن المدونة", url: "/about" },
+  { name: "المدونة", url: "/blog" },
+  { name: "اتصل بنا", url: "/Contact"}
+];
+---
+
+<nav style="padding: 12px; background:#f3f3f3; display:flex; gap:16px;">
+  {links.map(link => (
+    <a href={link.url} style="text-decoration:none; color:#333;">
+      {link.name}
+    </a>
+  ))}
+</nav>

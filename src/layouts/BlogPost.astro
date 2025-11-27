@@ -1,0 +1,13 @@
+---
+import Base from "./Base.astro";
+const { title, date, description } = Astro.props;
+---
+
+<Base>
+  <article style="max-width: 700px; margin: 40px auto;">
+    <h1>{title}</h1>
+    <p style="color: gray; margin-bottom: 20px;">📅 {date}</p>
+
+    <slot />
+  </article>
+</Base>

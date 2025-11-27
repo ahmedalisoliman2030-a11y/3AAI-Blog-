@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+---
+
+<Base>
+  <h1>المدونة</h1>
+  <p>جميع المقالات المنشورة</p>
+
+  <ul style="list-style:none; padding:0;">
+    {posts.map(post => (
+      <li style="margin-bottom:20px;">
+        <a href={`/blog/${post.slug}/`} style="font-size:20px;">
+          {post.data.title}
+        </a>
+        <p style="color:gray; font-size:14px;">{post.data.date}</p>
+      </li>
+    ))}
+  </ul>
+</Base>

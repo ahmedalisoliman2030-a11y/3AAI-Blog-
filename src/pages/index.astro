@@ -1,16 +1,28 @@
 ---
+import Navbar from "../components/Navbar.astro";
+import SearchIsland from "../components/react/SearchIsland.jsx";
+import { getCollection } from "astro:content";
 
+const posts = await getCollection("blog");
+
+// ترتيب حسب التاريخ
+const sorted = posts.sort(
+  (a, b) => new Date(b.data.date) - new Date(a.data.date)
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>المدونة</title>
+  </head>
+
+  <body>
+    <Navbar />
+
+    <h1>أرشيف المقالات</h1>
+
+    <SearchIsland posts={sorted} client:load />
+
+  </body>
 </html>
