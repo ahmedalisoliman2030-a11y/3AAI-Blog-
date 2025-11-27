@@ -1,7 +1,12 @@
 ---
 title: "المقال الثاني"
-date: "2025-01-15"
-tags: ["Web Development", "Arabic"]
+description: "تعرف على تطوير الويب باستخدام التقنيات الحديثة"
+date: 2025-01-15
+author: "اسم الكاتب"
+image: "/images/blog/web-dev.jpg"
+category: "تطوير الويب"
+tags: ["Web Development", "Arabic", "تقنية"]
+draft: false
 ---
 
 # المقال الثاني

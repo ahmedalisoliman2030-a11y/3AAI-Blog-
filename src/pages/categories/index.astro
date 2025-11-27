@@ -1,0 +1,134 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+const publishedPosts = allPosts.filter(post => !post.data.draft);
+
+const categoriesMap = new Map();
+publishedPosts.forEach(post => {
+  const category = post.data.category;
+  if (category) {
+    if (!categoriesMap.has(category)) {
+      categoriesMap.set(category, []);
+    }
+    categoriesMap.get(category).push(post);
+  }
+});
+
+const categories = Array.from(categoriesMap.entries()).map(([name, posts]) => ({
+  name,
+  count: posts.length,
+  posts: posts.slice(0, 3) // Show first 3 posts as preview
+}));
+---
+
+<BaseLayout title="التصنيفات" description="جميع تصنيفات المدونة">
+  <div class="container">
+    <h1>التصنيفات</h1>
+    <p class="subtitle">تصفح المقالات حسب التصنيف</p>
+    
+    <div class="categories-grid">
+      {categories.map(category => (
+        <div class="category-card">
+          <h2>
+            <a href={`/categories/${category.name}`}>{category.name}</a>
+          </h2>
+          <p class="count">{category.count} مقالة</p>
+          <ul class="preview-posts">
+            {category.posts.map(post => (
+              <li>
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              </li>
+            ))}
+          </ul>
+          <a href={`/categories/${category.name}`} class="view-all">
+            عرض الكل ←
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+  
+  .subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+  
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .category-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: var(--surface-color);
+  }
+  
+  .category-card h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+  }
+  
+  .category-card h2 a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+  
+  .category-card h2 a:hover {
+    color: var(--primary-color);
+  }
+  
+  .count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .preview-posts {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .preview-posts li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .preview-posts a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  
+  .preview-posts a:hover {
+    color: var(--primary-color);
+  }
+  
+  .view-all {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .view-all:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+const publishedPosts = allPosts.filter(post => !post.data.draft);
+
+const tagsMap = new Map();
+publishedPosts.forEach(post => {
+  (post.data.tags || []).forEach(tag => {
+    if (!tagsMap.has(tag)) {
+      tagsMap.set(tag, []);
+    }
+    tagsMap.get(tag).push(post);
+  });
+});
+
+const tags = Array.from(tagsMap.entries())
+  .map(([name, posts]) => ({
+    name,
+    count: posts.length
+  }))
+  .sort((a, b) => b.count - a.count);
+---
+
+<BaseLayout title="الوسوم" description="جميع وسوم المدونة">
+  <div class="container">
+    <h1>الوسوم</h1>
+    <p class="subtitle">تصفح المقالات حسب الوسم</p>
+    
+    <div class="tags-cloud">
+      {tags.map(tag => (
+        <a 
+          href={`/tags/${tag.name}`} 
+          class="tag"
+          style={`font-size: ${Math.min(2, 1 + tag.count * 0.2)}rem;`}
+        >
+          {tag.name}
+          <span class="count">({tag.count})</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+  
+  .subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+  
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .tag {
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  
+  .tag:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+  }
+  
+  .tag .count {
+    font-size: 0.8em;
+    opacity: 0.7;
+  }
+</style>

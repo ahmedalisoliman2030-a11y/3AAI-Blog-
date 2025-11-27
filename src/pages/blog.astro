@@ -1,22 +1,43 @@
 ---
-import Base from "../layouts/Base.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import SearchIsland from "../components/react/SearchIsland.jsx";
 
-const posts = await getCollection("blog");
+const allPosts = await getCollection("blog");
+const publishedPosts = allPosts.filter(post => !post.data.draft);
+
+// Prepare posts with body content for search
+const postsWithBody = publishedPosts.map(post => ({
+  slug: post.slug,
+  data: post.data,
+  body: post.body
+}));
 ---
 
-<Base>
-  <h1>المدونة</h1>
-  <p>جميع المقالات المنشورة</p>
+<BaseLayout title="المدونة" description="جميع المقالات المنشورة">
+  <div class="container">
+    <h1>المدونة</h1>
+    <p class="subtitle">جميع المقالات المنشورة</p>
 
-  <ul style="list-style:none; padding:0;">
-    {posts.map(post => (
-      <li style="margin-bottom:20px;">
-        <a href={`/blog/${post.slug}/`} style="font-size:20px;">
-          {post.data.title}
-        </a>
-        <p style="color:gray; font-size:14px;">{post.data.date}</p>
-      </li>
-    ))}
-  </ul>
-</Base>
+    <SearchIsland posts={postsWithBody} client:load />
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+  
+  .subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+</style>

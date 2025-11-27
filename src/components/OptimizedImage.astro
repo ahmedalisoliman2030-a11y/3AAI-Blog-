@@ -1,0 +1,52 @@
+---
+import { isExternalImage, validateAltText } from '../utils/image';
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  quality?: number;
+  widths?: number[];
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className,
+  loading = 'lazy',
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px',
+  quality = 80,
+  widths = [400, 800, 1200],
+} = Astro.props;
+
+// التحقق من وجود نص بديل
+if (!validateAltText(alt)) {
+  console.warn(`تحذير: الصورة ${src} لا تحتوي على نص بديل (alt text)`);
+}
+
+// تحديد ما إذا كانت الصورة محلية أو خارجية
+const isExternal = isExternalImage(src);
+
+// توليد srcset للصور المحلية
+const srcset = !isExternal && widths.length > 0
+  ? widths.map(w => `${src}?w=${w} ${w}w`).join(', ')
+  : undefined;
+---
+
+<img
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  class={className}
+  loading={loading}
+  srcset={srcset}
+  sizes={srcset ? sizes : undefined}
+  decoding="async"
+/>

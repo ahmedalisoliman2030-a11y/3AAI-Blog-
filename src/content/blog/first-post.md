@@ -1,7 +1,12 @@
 ---
 title: "أول مقال تجريبي"
-date: "2025-01-10"
-tags: ["Astro", "Tutorial"]
+description: "مقدمة شاملة عن Astro وكيفية استخدامه لبناء مواقع سريعة"
+date: 2025-01-10
+author: "اسم الكاتب"
+image: "/images/blog/astro-intro.jpg"
+category: "تقنية"
+tags: ["Astro", "Tutorial", "تطوير الويب"]
+draft: false
 ---
 
 # أول مقال تجريبي
