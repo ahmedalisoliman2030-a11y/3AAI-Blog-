@@ -89,3 +89,15 @@ collections:
             fields:
               - { label: "النص", name: "text", widget: "string" }
               - { label: "الرابط", name: "href", widget: "string" }
+
+      - label: "روابط التواصل الاجتماعي"
+        name: "social"
+        file: "src/data/social.json"
+        description: "تحكم في روابط وسائل التواصل الاجتماعي (Twitter, GitHub, LinkedIn)"
+        fields:
+          - label: "الروابط"
+            name: "social_links"
+            widget: "list"
+            fields:
+              - { label: "المنصة", name: "platform", widget: "select", options: ["twitter", "github", "linkedin", "facebook", "instagram"] }
+              - { label: "الرابط", name: "url", widget: "string" }

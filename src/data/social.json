@@ -1,0 +1,16 @@
+{
+    "social_links": [
+        {
+            "platform": "twitter",
+            "url": "https://twitter.com/3aai_blog"
+        },
+        {
+            "platform": "github",
+            "url": "https://github.com/3aai"
+        },
+        {
+            "platform": "linkedin",
+            "url": "https://linkedin.com/company/3aai"
+        }
+    ]
+}
