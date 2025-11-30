@@ -1,0 +1,141 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title="شروط الاستخدام" description="شروط وأحكام استخدام مدونة 3AAI">
+    <div class="container">
+        <div class="content-page">
+            <h1>شروط الاستخدام</h1>
+            <p class="last-updated">
+                آخر تحديث: {new Date().toLocaleDateString("ar-SA")}
+            </p>
+
+            <section>
+                <h2>القبول بالشروط</h2>
+                <p>
+                    باستخدامك لموقع 3AAI Blog، فإنك توافق على الالتزام بهذه
+                    الشروط والأحكام. إذا كنت لا توافق على أي جزء من هذه الشروط،
+                    يرجى عدم استخدام الموقع.
+                </p>
+            </section>
+
+            <section>
+                <h2>استخدام المحتوى</h2>
+                <p>
+                    جميع المحتويات المنشورة على هذا الموقع محمية بحقوق النشر.
+                    يمكنك:
+                </p>
+                <ul>
+                    <li>قراءة ومشاركة المقالات مع الإشارة إلى المصدر</li>
+                    <li>الاقتباس من المقالات بشرط ذكر المصدر</li>
+                </ul>
+                <p>لا يمكنك:</p>
+                <ul>
+                    <li>نسخ المحتوى بالكامل دون إذن</li>
+                    <li>استخدام المحتوى لأغراض تجارية دون موافقة</li>
+                    <li>تعديل أو تحريف المحتوى</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>سلوك المستخدم</h2>
+                <p>عند استخدام الموقع، يجب عليك:</p>
+                <ul>
+                    <li>احترام الآخرين وعدم نشر محتوى مسيء</li>
+                    <li>عدم نشر محتوى غير قانوني أو ضار</li>
+                    <li>عدم محاولة اختراق أو تعطيل الموقع</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>إخلاء المسؤولية</h2>
+                <p>
+                    المحتوى المقدم على هذا الموقع هو لأغراض إعلامية فقط. نحن لا
+                    نضمن دقة أو اكتمال المعلومات، ولا نتحمل أي مسؤولية عن أي
+                    أضرار ناتجة عن استخدام المعلومات.
+                </p>
+            </section>
+
+            <section>
+                <h2>الروابط الخارجية</h2>
+                <p>
+                    قد يحتوي الموقع على روابط لمواقع خارجية. نحن لسنا مسؤولين عن
+                    محتوى أو سياسات الخصوصية لهذه المواقع.
+                </p>
+            </section>
+
+            <section>
+                <h2>التعديلات</h2>
+                <p>
+                    نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم نشر
+                    التعديلات على هذه الصفحة مع تحديث تاريخ آخر تعديل.
+                </p>
+            </section>
+
+            <section>
+                <h2>التواصل</h2>
+                <p>
+                    لأي استفسارات حول شروط الاستخدام، يرجى التواصل معنا عبر <a
+                        href="/contact">صفحة الاتصال</a
+                    >.
+                </p>
+            </section>
+        </div>
+    </div>
+</MainLayout>
+
+<style>
+    .content-page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-text);
+    }
+
+    .last-updated {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    section {
+        margin-bottom: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: var(--color-text);
+    }
+
+    p {
+        color: var(--color-text-secondary);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        list-style: disc;
+        padding-right: 2rem;
+        color: var(--color-text-secondary);
+        line-height: 1.8;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+    }
+
+    a {
+        color: var(--color-primary);
+        text-decoration: underline;
+    }
+
+    a:hover {
+        color: var(--color-primary-hover);
+    }
+</style>

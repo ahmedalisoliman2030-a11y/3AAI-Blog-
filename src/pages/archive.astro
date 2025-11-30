@@ -1,0 +1,204 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+const publishedPosts = allPosts
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Group posts by year and month
+const postsByDate = publishedPosts.reduce(
+    (acc, post) => {
+        const year = post.data.date.getFullYear();
+        const month = post.data.date.toLocaleDateString("ar-SA", {
+            month: "long",
+        });
+
+        if (!acc[year]) {
+            acc[year] = {};
+        }
+        if (!acc[year][month]) {
+            acc[year][month] = [];
+        }
+
+        acc[year][month].push(post);
+        return acc;
+    },
+    {} as Record<number, Record<string, typeof publishedPosts>>,
+);
+
+const years = Object.keys(postsByDate).sort((a, b) => Number(b) - Number(a));
+---
+
+<MainLayout
+    title="أرشيف المقالات"
+    description="أرشيف جميع مقالات المدونة مرتبة حسب التاريخ"
+>
+    <div class="container">
+        <div class="archive-header">
+            <h1>أرشيف المقالات</h1>
+            <p class="subtitle">
+                جميع المقالات مرتبة حسب التاريخ ({publishedPosts.length} مقالة)
+            </p>
+        </div>
+
+        <div class="archive-content">
+            {
+                years.map((year) => (
+                    <div class="year-section">
+                        <h2 class="year-title">{year}</h2>
+
+                        {Object.keys(postsByDate[Number(year)]).map((month) => (
+                            <div class="month-section">
+                                <h3 class="month-title">{month}</h3>
+
+                                <ul class="posts-list">
+                                    {postsByDate[Number(year)][month].map(
+                                        (post) => (
+                                            <li class="post-item">
+                                                <a
+                                                    href={`/blog/${post.slug}`}
+                                                    class="post-link"
+                                                >
+                                                    <span class="post-date">
+                                                        {post.data.date.toLocaleDateString(
+                                                            "ar-SA",
+                                                            { day: "numeric" },
+                                                        )}
+                                                    </span>
+                                                    <span class="post-title">
+                                                        {post.data.title}
+                                                    </span>
+                                                    <span class="post-category">
+                                                        {post.data.category}
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        ),
+                                    )}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</MainLayout>
+
+<style>
+    .archive-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-text);
+    }
+
+    .subtitle {
+        color: var(--color-text-secondary);
+        font-size: 1.1rem;
+    }
+
+    .archive-content {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .year-section {
+        margin-bottom: 3rem;
+    }
+
+    .year-title {
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(to right, #60a5fa, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 1.5rem;
+    }
+
+    .month-section {
+        margin-bottom: 2rem;
+    }
+
+    .month-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--color-border);
+    }
+
+    .posts-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .post-item {
+        margin-bottom: 0.75rem;
+    }
+
+    .post-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem;
+        border-radius: var(--radius-md);
+        text-decoration: none;
+        transition: all var(--transition-fast);
+    }
+
+    .post-link:hover {
+        background: var(--color-surface-hover);
+    }
+
+    .post-date {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-primary);
+        color: white;
+        border-radius: var(--radius-md);
+        font-weight: 700;
+    }
+
+    .post-title {
+        flex: 1;
+        color: var(--color-text);
+        font-weight: 500;
+    }
+
+    .post-category {
+        flex-shrink: 0;
+        padding: 0.25rem 0.75rem;
+        background: var(--color-surface-hover);
+        color: var(--color-text-secondary);
+        border-radius: var(--radius-sm);
+        font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+        .post-link {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .post-date {
+            width: auto;
+            height: auto;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+</style>

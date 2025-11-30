@@ -1,0 +1,10 @@
+# robots.txt for 3AAI Blog
+
+User-agent: *
+Allow: /
+
+# Disallow admin panel from search engines
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml

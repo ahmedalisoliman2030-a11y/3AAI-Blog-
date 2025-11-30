@@ -1,43 +1,193 @@
-# Astro Starter Kit: Minimal
+# 🌟 مدونة 3AAI - قالب Astro احترافي
 
-```sh
-npm create astro@latest -- --template minimal
+قالب مدونة عربي احترافي مبني على Astro مع لوحة تحكم مرئية (Decap CMS) وتصميم داكن جذاب.
+
+![3AAI Blog](public/logo.png)
+
+---
+
+## ✨ المميزات
+
+### 🎨 التصميم
+- ✅ ثيم داكن افتراضي (Dark Mode) مع إمكانية التبديل للوضع الفاتح
+- ✅ تدرجات لونية جميلة في قسم الترحيب
+- ✅ خط Cairo العربي الاحترافي
+- ✅ تصميم متجاوب بالكامل (Responsive)
+- ✅ رسوم متحركة سلسة (Smooth Animations)
+
+### 📝 إدارة المحتوى
+- ✅ **Decap CMS** - لوحة تحكم مرئية سهلة الاستخدام
+- ✅ إضافة/تعديل/حذف المقالات من الواجهة
+- ✅ رفع الصور مباشرة
+- ✅ معاينة المقالات قبل النشر
+- ✅ نظام المسودات (Drafts)
+
+### 🔍 SEO & الأداء
+- ✅ Open Graph Tags للمشاركة على وسائل التواصل
+- ✅ Twitter Cards
+- ✅ Sitemap تلقائي
+- ✅ robots.txt
+- ✅ تحسين الصور (Image Optimization)
+- ✅ Lazy Loading
+
+### 🚀 الميزات التفاعلية
+- ✅ نظام بحث في المقالات
+- ✅ زر العودة للأعلى (Back to Top)
+- ✅ أزرار مشاركة المقالات (Twitter, Facebook, LinkedIn, WhatsApp)
+- ✅ نسخ الرابط
+
+### 📄 الصفحات
+- ✅ الصفحة الرئيسية
+- ✅ صفحة المقالات
+- ✅ صفحة التصنيفات
+- ✅ صفحة الوسوم
+- ✅ صفحة من نحن
+- ✅ صفحة اتصل بنا
+- ✅ صفحة الأرشيف
+- ✅ صفحة سياسة الخصوصية
+- ✅ صفحة شروط الاستخدام
+- ✅ صفحة 404 مخصصة
+
+---
+
+## 🛠️ التقنيات المستخدمة
+
+- **[Astro](https://astro.build/)** - إطار العمل الأساسي
+- **[Decap CMS](https://decapcms.org/)** - نظام إدارة المحتوى
+- **[React](https://react.dev/)** - للمكونات التفاعلية
+- **TypeScript** - للكتابة الآمنة
+- **CSS Variables** - للتخصيص السهل
+
+---
+
+## 📦 التثبيت السريع
+
+```bash
+# استنساخ المشروع
+git clone https://github.com/yourusername/3aai-blog.git
+cd 3aai-blog
+
+# تثبيت الاعتماديات
+npm install
+
+# تشغيل الخادم المحلي
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+الموقع سيعمل على: `http://localhost:4321`
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 📚 التوثيق
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+- [دليل التثبيت الكامل](INSTALLATION.md)
+- [دليل المستخدم (Decap CMS)](USER_GUIDE.md)
+- [دليل النشر](DEPLOYMENT.md)
+
+---
+
+## 🎯 الاستخدام
+
+### إضافة مقال جديد (بدون CMS)
+
+1. أنشئ ملف `.md` في `src/content/blog/`
+2. أضف البيانات الأساسية (Front Matter):
+
+```markdown
+---
+title: "عنوان المقال"
+description: "وصف المقال"
+date: 2025-11-30
+author: "اسم الكاتب"
+category: "التصنيف"
+tags: ["وسم1", "وسم2"]
+image: "/images/blog/article.png"
+---
+
+محتوى المقال هنا...
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### إضافة مقال عبر CMS
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. اذهب إلى `/admin`
+2. سجّل الدخول بحساب GitHub
+3. اضغط على "New المقالات"
+4. املأ البيانات واضغط "Publish"
 
-Any static assets, like images, can be placed in the `public/` directory.
+---
 
-## 🧞 Commands
+## 🎨 التخصيص
 
-All commands are run from the root of the project, from a terminal:
+### تغيير الألوان
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+عدّل `src/styles/global.css`:
 
-## 👀 Want to learn more?
+```css
+:root {
+  --color-primary: #3b82f6;
+  --color-background: #000000;
+  /* ... */
+}
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### تغيير الشعار
+
+استبدل `public/logo.png` بشعارك.
+
+### تحديث معلومات الموقع
+
+عدّل `src/config/site.ts`:
+
+```typescript
+export const siteConfig = {
+  title: 'اسم مدونتك',
+  description: 'وصف مدونتك',
+  // ...
+};
+```
+
+---
+
+## 🚀 النشر
+
+### Netlify (موصى به)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start)
+
+### Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+راجع [دليل النشر](DEPLOYMENT.md) للتفاصيل الكاملة.
+
+---
+
+## 📝 الترخيص
+
+MIT License - استخدم المشروع بحرية!
+
+---
+
+## 🤝 المساهمة
+
+المساهمات مرحب بها! افتح Issue أو Pull Request.
+
+---
+
+## 💬 الدعم
+
+للمساعدة أو الأسئلة:
+- افتح [Issue](https://github.com/yourusername/3aai-blog/issues)
+- تواصل عبر [البريد الإلكتروني](mailto:contact@3aai.blog)
+
+---
+
+## 🙏 شكر وتقدير
+
+- [Astro](https://astro.build/)
+- [Decap CMS](https://decapcms.org/)
+- [Google Fonts - Cairo](https://fonts.google.com/specimen/Cairo)
+
+---
+
+**صُنع بـ ❤️ في السعودية**

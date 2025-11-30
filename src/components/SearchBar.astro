@@ -1,0 +1,202 @@
+---
+
+---
+
+<div class="search-container">
+    <div class="search-box">
+        <svg
+            class="search-icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="ابحث في المقالات..."
+            aria-label="البحث في المقالات"
+        />
+    </div>
+    <div id="search-results" class="search-results hidden"></div>
+</div>
+
+<style>
+    .search-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+    }
+
+    .search-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 1rem;
+        color: var(--color-text-muted);
+        pointer-events: none;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.75rem 3rem 0.75rem 1rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        color: var(--color-text);
+        font-size: 1rem;
+        transition: all var(--transition-fast);
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+
+    .search-results {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0;
+        right: 0;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 100;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .search-results.hidden {
+        display: none;
+    }
+
+    .search-result-item {
+        padding: 1rem;
+        border-bottom: 1px solid var(--color-border);
+        cursor: pointer;
+        transition: background var(--transition-fast);
+    }
+
+    .search-result-item:last-child {
+        border-bottom: none;
+    }
+
+    .search-result-item:hover {
+        background: var(--color-surface-hover);
+    }
+
+    .result-title {
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 0.25rem;
+    }
+
+    .result-description {
+        font-size: 0.9rem;
+        color: var(--color-text-secondary);
+        line-height: 1.4;
+    }
+
+    .no-results {
+        padding: 2rem;
+        text-align: center;
+        color: var(--color-text-muted);
+    }
+</style>
+
+<script>
+    // Fetch all blog posts
+    let allPosts = [];
+
+    async function loadPosts() {
+        try {
+            const response = await fetch("/api/search.json");
+            allPosts = await response.json();
+        } catch (error) {
+            console.error("Failed to load posts:", error);
+        }
+    }
+
+    // Search functionality
+    const searchInput = document.getElementById("search-input");
+    const searchResults = document.getElementById("search-results");
+
+    if (searchInput && searchResults) {
+        loadPosts();
+
+        searchInput.addEventListener("input", (e) => {
+            const query = e.target.value.trim().toLowerCase();
+
+            if (query.length < 2) {
+                searchResults.classList.add("hidden");
+                return;
+            }
+
+            const results = allPosts.filter(
+                (post) =>
+                    post.title.toLowerCase().includes(query) ||
+                    post.description.toLowerCase().includes(query) ||
+                    post.tags.some((tag) => tag.toLowerCase().includes(query)),
+            );
+
+            displayResults(results, query);
+        });
+
+        // Close results when clicking outside
+        document.addEventListener("click", (e) => {
+            if (
+                !searchInput.contains(e.target) &&
+                !searchResults.contains(e.target)
+            ) {
+                searchResults.classList.add("hidden");
+            }
+        });
+    }
+
+    function displayResults(results, query) {
+        const searchResults = document.getElementById("search-results");
+
+        if (results.length === 0) {
+            searchResults.innerHTML =
+                '<div class="no-results">لا توجد نتائج</div>';
+            searchResults.classList.remove("hidden");
+            return;
+        }
+
+        const html = results
+            .slice(0, 5)
+            .map(
+                (post) => `
+      <a href="/blog/${post.slug}" class="search-result-item" style="display: block; text-decoration: none;">
+        <div class="result-title">${highlightText(post.title, query)}</div>
+        <div class="result-description">${highlightText(post.description, query)}</div>
+      </a>
+    `,
+            )
+            .join("");
+
+        searchResults.innerHTML = html;
+        searchResults.classList.remove("hidden");
+    }
+
+    function highlightText(text, query) {
+        const regex = new RegExp(`(${query})`, "gi");
+        return text.replace(
+            regex,
+            '<mark style="background: var(--color-primary); color: white; padding: 0 2px;">$1</mark>',
+        );
+    }
+</script>

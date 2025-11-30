@@ -1,0 +1,81 @@
+---
+
+---
+
+<button id="back-to-top" class="back-to-top" aria-label="العودة للأعلى">
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+    >
+        <path d="M12 19V5M5 12l7-7 7 7"></path>
+    </svg>
+</button>
+
+<style>
+    .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        left: 2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--transition-normal);
+        z-index: 999;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .back-to-top:hover {
+        background: var(--color-primary-hover);
+        transform: translateY(-4px);
+    }
+
+    @media (max-width: 768px) {
+        .back-to-top {
+            bottom: 1rem;
+            left: 1rem;
+            width: 45px;
+            height: 45px;
+        }
+    }
+</style>
+
+<script>
+    const backToTopButton = document.getElementById("back-to-top");
+
+    if (backToTopButton) {
+        // Show/hide button based on scroll position
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add("visible");
+            } else {
+                backToTopButton.classList.remove("visible");
+            }
+        });
+
+        // Scroll to top on click
+        backToTopButton.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        });
+    }
+</script>

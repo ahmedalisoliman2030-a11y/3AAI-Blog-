@@ -1,0 +1,43 @@
+# للاختبار المحلي (Development)
+local_backend: true
+backend:
+  name: git-gateway
+
+# للإنتاج (Production) - قم بإلغاء التعليق وتعليق test-repo
+# backend:
+#   name: git-gateway
+#   branch: main
+
+media_folder: "public/images/blog" # مجلد حفظ الصور
+public_folder: "/images/blog" # المسار العام للصور
+
+locale: "ar" # اللغة العربية
+
+collections:
+  - name: "blog" # اسم المجموعة
+    label: "المقالات" # التسمية في الواجهة
+    folder: "src/content/blog" # مجلد المقالات
+    create: true # السماح بإنشاء مقالات جديدة
+    slug: "{{slug}}" # نمط اسم الملف
+    fields: # حقول المقال
+      - { label: "العنوان", name: "title", widget: "string" }
+      - { label: "الوصف", name: "description", widget: "text" }
+      - { label: "تاريخ النشر", name: "date", widget: "datetime" }
+      - { label: "الكاتب", name: "author", widget: "string", default: "مدير المدونة" }
+      - { label: "الصورة البارزة", name: "image", widget: "image", required: false }
+      - { label: "التصنيف", name: "category", widget: "string" }
+      - { label: "الوسوم", name: "tags", widget: "list", default: [] }
+      - { label: "مسودة؟", name: "draft", widget: "boolean", default: false }
+      - { label: "المحتوى", name: "body", widget: "markdown" }
+
+  - name: "settings" # إعدادات الموقع
+    label: "الإعدادات"
+    files:
+      - label: "إعدادات الموقع - تحكم في العنوان والوصف"
+        name: "site"
+        file: "src/config/site.ts"
+        description: "تحكم في إعدادات الموقع العامة مثل العنوان والوصف والرابط."
+        fields:
+          - { label: "عنوان الموقع", name: "title", widget: "string", hint: "يظهر في شريط المتصفح ومحركات البحث" }
+          - { label: "وصف الموقع", name: "description", widget: "text", hint: "وصف مختصر للموقع لمحركات البحث (SEO)" }
+          - { label: "رابط الموقع", name: "url", widget: "string", hint: "الرابط الكامل للموقع (مثال: https://example.com)" }

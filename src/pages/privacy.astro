@@ -1,0 +1,139 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title="سياسة الخصوصية" description="سياسة الخصوصية لمدونة 3AAI">
+    <div class="container">
+        <div class="content-page">
+            <h1>سياسة الخصوصية</h1>
+            <p class="last-updated">
+                آخر تحديث: {new Date().toLocaleDateString("ar-SA")}
+            </p>
+
+            <section>
+                <h2>مقدمة</h2>
+                <p>
+                    نحن في 3AAI Blog نحترم خصوصيتك ونلتزم بحماية بياناتك
+                    الشخصية. توضح هذه السياسة كيفية جمع واستخدام وحماية
+                    معلوماتك.
+                </p>
+            </section>
+
+            <section>
+                <h2>المعلومات التي نجمعها</h2>
+                <p>قد نجمع الأنواع التالية من المعلومات:</p>
+                <ul>
+                    <li>
+                        معلومات الاتصال (الاسم، البريد الإلكتروني) عند استخدام
+                        نموذج الاتصال
+                    </li>
+                    <li>بيانات الاستخدام (الصفحات المزارة، الوقت المستغرق)</li>
+                    <li>
+                        ملفات تعريف الارتباط (Cookies) لتحسين تجربة المستخدم
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>كيفية استخدام المعلومات</h2>
+                <p>نستخدم المعلومات المجمعة للأغراض التالية:</p>
+                <ul>
+                    <li>الرد على استفساراتك وتقديم الدعم</li>
+                    <li>تحسين محتوى وأداء الموقع</li>
+                    <li>إرسال تحديثات ومقالات جديدة (إذا اشتركت)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>حماية البيانات</h2>
+                <p>
+                    نتخذ إجراءات أمنية مناسبة لحماية معلوماتك من الوصول غير
+                    المصرح به أو التعديل أو الإفصاح أو التدمير.
+                </p>
+            </section>
+
+            <section>
+                <h2>ملفات تعريف الارتباط (Cookies)</h2>
+                <p>
+                    نستخدم ملفات تعريف الارتباط لتحسين تجربتك على الموقع. يمكنك
+                    تعطيل ملفات تعريف الارتباط من إعدادات المتصفح.
+                </p>
+            </section>
+
+            <section>
+                <h2>حقوقك</h2>
+                <p>لديك الحق في:</p>
+                <ul>
+                    <li>الوصول إلى بياناتك الشخصية</li>
+                    <li>تصحيح أو تحديث بياناتك</li>
+                    <li>طلب حذف بياناتك</li>
+                    <li>الاعتراض على معالجة بياناتك</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>التواصل معنا</h2>
+                <p>
+                    إذا كان لديك أي أسئلة حول سياسة الخصوصية، يرجى التواصل معنا
+                    عبر <a href="/contact">صفحة الاتصال</a>.
+                </p>
+            </section>
+        </div>
+    </div>
+</MainLayout>
+
+<style>
+    .content-page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-text);
+    }
+
+    .last-updated {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    section {
+        margin-bottom: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        color: var(--color-text);
+    }
+
+    p {
+        color: var(--color-text-secondary);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        list-style: disc;
+        padding-right: 2rem;
+        color: var(--color-text-secondary);
+        line-height: 1.8;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+    }
+
+    a {
+        color: var(--color-primary);
+        text-decoration: underline;
+    }
+
+    a:hover {
+        color: var(--color-primary-hover);
+    }
+</style>
