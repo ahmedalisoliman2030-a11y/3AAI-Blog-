@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "../config/site";
+import navigationData from "../data/navigation.json";
 
 const currentPath = Astro.url.pathname;
 ---
@@ -25,13 +26,13 @@ const currentPath = Astro.url.pathname;
       <nav class="nav">
         <ul class="nav-list">
           {
-            siteConfig.navigation.map((item) => (
+            navigationData.header.map((item) => (
               <li class="nav-item">
                 <a
                   href={item.href}
                   class={`nav-link ${currentPath === item.href ? "active" : ""}`}
                 >
-                  {item.label}
+                  {item.text}
                 </a>
               </li>
             ))

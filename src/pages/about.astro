@@ -1,18 +1,57 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { getEntry } from "astro:content";
+
+const aboutPage = await getEntry("pages", "about");
+const { Content } = await aboutPage.render();
 ---
 
-<MainLayout title="من نحن">
+<MainLayout
+  title={aboutPage.data.title}
+  description={aboutPage.data.description}
+>
   <div class="container">
-    <h1>عن المدونة</h1>
-    <p>هذه مدونة تجريبية نبنيها خطوة بخطوة باستخدام Astro.</p>
+    <div class="content-page">
+      <h1>{aboutPage.data.title}</h1>
+      <Content />
+    </div>
   </div>
 </MainLayout>
 
 <style>
-  .container {
+  .content-page {
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2rem 0;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+  }
+
+  :global(.content-page h2) {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  :global(.content-page p) {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  :global(.content-page ul) {
+    list-style: disc;
+    padding-right: 2rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+  }
+
+  :global(.content-page li) {
+    margin-bottom: 0.5rem;
   }
 </style>
