@@ -1,0 +1,38 @@
+{
+    "header": [
+        {
+            "text": "الرئيسية",
+            "href": "/"
+        },
+        {
+            "text": "المقالات",
+            "href": "/blog"
+        },
+        {
+            "text": "التصنيفات",
+            "href": "/categories"
+        },
+        {
+            "text": "من نحن",
+            "href": "/about"
+        },
+        {
+            "text": "اتصل بنا",
+            "href": "/contact"
+        }
+    ],
+    "footer": [
+        {
+            "text": "سياسة الخصوصية",
+            "href": "/privacy"
+        },
+        {
+            "text": "شروط الاستخدام",
+            "href": "/terms"
+        },
+        {
+            "text": "الأرشيف",
+            "href": "/archive"
+        }
+    ]
+}
