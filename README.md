@@ -321,7 +321,7 @@ export const siteConfig = {
 
 ### س: ماذا لو واجهت مشكلة؟
 
-**ج:** افتح [Issue على GitHub](https://github.com/yourusername/dawen/issues) أو راسلنا على [contact@3aai.in](mailto:contact@3aai.in)
+**ج:** افتح [Issue على GitHub](https://github.com/yourusername/dawen/issues) أو راسلنا على [support@3aai.in](mailto:support@3aai.in)
 
 ---
 
@@ -341,7 +341,7 @@ export const siteConfig = {
 **أحمد علي عبداللطيف**
 
 - 🌐 الموقع: [3aai.in](https://3aai.in)
-- ✉️ البريد: [contact@3aai.in](mailto:contact@3aai.in)
+- ✉️ البريد: [support@3aai.in](mailto:support@3aai.in)
 - 👨‍💻 التخصص: Flutter Developer & AI Engineer
 
 ---
@@ -356,7 +356,7 @@ export const siteConfig = {
 
 للمساعدة أو الأسئلة أو طلب إذن الاستخدام التجاري:
 - 🌐 الموقع: [3aai.in](https://3aai.in)
-- ✉️ البريد: [contact@3aai.in](mailto:contact@3aai.in)
+- ✉️ البريد: [support@3aai.in](mailto:support@3aai.in)
 - 🐛 GitHub Issues: [dawen/issues](https://github.com/yourusername/dawen/issues)
 
 ## 🙏 شكر وتقدير
