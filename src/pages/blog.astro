@@ -3,10 +3,13 @@ import MainLayout from "../layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
 import SearchIsland from "../components/react/SearchIsland.jsx";
 
+// جلب جميع المقالات
 const allPosts = await getCollection("blog");
+// تصفية المقالات المنشورة فقط
 const publishedPosts = allPosts.filter((post) => !post.data.draft);
 
-// Prepare posts with body content for search
+// تحضير البيانات للبحث (بما في ذلك محتوى المقال)
+// يتم تمرير هذه البيانات إلى مكون React للبحث الفوري
 const postsWithBody = publishedPosts.map((post) => ({
   slug: post.slug,
   data: post.data,

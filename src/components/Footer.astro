@@ -10,29 +10,7 @@ const currentYear = getCurrentYear();
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
-      <!-- About Section -->
-      <div class="footer-section">
-        <h3 class="footer-title">{siteConfig.footer.about.title}</h3>
-        <p class="footer-text">{siteConfig.footer.about.description}</p>
-      </div>
-
-      <!-- Links Section -->
-      <div class="footer-section">
-        <h3 class="footer-title">روابط مهمة</h3>
-        <ul class="footer-links">
-          {
-            navigationData.footer.map((link) => (
-              <li>
-                <a href={link.href} class="footer-link">
-                  {link.text}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <!-- Social Section -->
+      <!-- قسم التواصل الاجتماعي: يقرأ البيانات من ملف social.json -->
       <div class="footer-section">
         <h3 class="footer-title">تابعنا</h3>
         <div class="social-links">

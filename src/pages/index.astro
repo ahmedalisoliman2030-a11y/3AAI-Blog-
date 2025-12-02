@@ -4,9 +4,10 @@ import BlogCard from "../components/BlogCard.astro";
 import { getCollection } from "astro:content";
 import { siteConfig } from "../config/site";
 
+// جلب جميع المقالات من مجموعة "blog"
 const posts = await getCollection("blog");
 
-// تصفية المقالات المنشورة فقط وترتيبها حسب التاريخ
+// تصفية المقالات المنشورة فقط (التي ليست مسودة) وترتيبها حسب التاريخ (الأحدث أولاً)
 const publishedPosts = posts
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -14,11 +15,13 @@ const publishedPosts = posts
 
 <MainLayout title={siteConfig.title} description={siteConfig.description}>
   <div class="container">
+    <!-- قسم الترحيب (Hero Section) -->
     <section class="hero">
       <h1 class="hero-title">مرحباً بك في {siteConfig.title}</h1>
       <p class="hero-description">{siteConfig.description}</p>
     </section>
 
+    <!-- قسم المقالات -->
     <section class="posts-section">
       <h2 class="section-title">أحدث المقالات</h2>
 

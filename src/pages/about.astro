@@ -2,7 +2,14 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import { getEntry } from "astro:content";
 
+// جلب محتوى صفحة "من نحن" من مجموعة "pages"
 const aboutPage = await getEntry("pages", "about");
+
+if (!aboutPage) {
+  throw new Error("Could not find about page");
+}
+
+// تحويل محتوى Markdown إلى HTML
 const { Content } = await aboutPage.render();
 ---
 
