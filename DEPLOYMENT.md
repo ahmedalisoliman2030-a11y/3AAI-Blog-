@@ -41,26 +41,22 @@ git push -u origin main
 ---
 
 ## الخطوة 3: إعداد لوحة التحكم (Decap CMS)
-
-لكي تعمل لوحة التحكم (`/admin`)، يجب تفعيل خدمة الهوية (Identity) وإعداد GitHub OAuth.
-
-### 1. تفعيل Identity
-1. في لوحة تحكم Netlify لموقعك، اذهب إلى **Site configuration** > **Identity**.
-2. اضغط **Enable Identity**.
-3. في قسم **Registration**، تأكد من أنها **Open** (أو Invite only إذا كنت تريد تقييد الوصول).
-4. في قسم **External providers**، أضف **GitHub**.
-5. في قسم **Services** > **Git Gateway**، اضغط **Enable Git Gateway**.
-
-### 2. إعداد GitHub OAuth (مهم جداً)
-1. اذهب إلى إعدادات المطورين في GitHub: [Developer Settings](https://github.com/settings/developers).
-2. اضغط **New OAuth App**.
-3. املأ البيانات:
-   - **Application Name:** 3AAI Blog CMS
-   - **Homepage URL:** رابط موقعك على Netlify (مثلاً `https://my-blog.netlify.app`)
-   - **Authorization callback URL:** `https://api.netlify.com/auth/done`
-4. احفظ `Client ID` و `Client Secret`.
-5. عد إلى Netlify > **Site configuration** > **Identity** > **External providers** > **GitHub**.
-6. أدخل الـ `Client ID` و `Client Secret` هناك.
+ 
+ لكي تعمل لوحة التحكم (`/admin`)، يجب إعداد GitHub OAuth للسماح للمستخدمين بتسجيل الدخول.
+ 
+ ### إعداد GitHub OAuth (مهم جداً)
+ 1. اذهب إلى إعدادات المطورين في GitHub: [Developer Settings](https://github.com/settings/developers).
+ 2. اضغط **New OAuth App**.
+ 3. املأ البيانات:
+    - **Application Name:** 3AAI Blog CMS
+    - **Homepage URL:** رابط موقعك على Netlify (مثلاً `https://my-blog.netlify.app`)
+    - **Authorization callback URL:** `https://api.netlify.com/auth/done`
+ 4. اضغط **Register application**.
+ 5. انسخ `Client ID` و `Client Secret`.
+ 6. اذهب إلى لوحة تحكم Netlify لموقعك.
+ 7. انتقل إلى **Site configuration** > **Access control** > **OAuth**.
+ 8. اضغط **Install provider** واختر **GitHub**.
+ 9. الصق `Client ID` و `Client Secret` واضغط **Install**.
 
 ---
 
