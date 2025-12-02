@@ -1,12 +1,11 @@
 # للاختبار المحلي (Development)
 local_backend: true
-backend:
-  name: git-gateway
 
-# للإنتاج (Production) - قم بإلغاء التعليق وتعليق test-repo
-# backend:
-#   name: git-gateway
-#   branch: main
+# للإنتاج (Production) - GitHub Backend
+backend:
+  name: github
+  repo: ahmedalisoliman2030-a11y/3AAI-Blog-  # اسم المستودع الفعلي على GitHub
+  branch: main
 
 media_folder: "public/images/blog" # مجلد حفظ الصور
 public_folder: "/images/blog" # المسار العام للصور
