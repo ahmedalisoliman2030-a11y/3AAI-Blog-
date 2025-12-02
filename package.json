@@ -1,7 +1,15 @@
 {
-  "name": "flaky-field",
+  "name": "dawen",
+  "version": "1.0.0",
+  "description": "قالب إدارة محتوى عربي مفتوح المصدر من 3AAI - Dawen: Arabic CMS Template",
+  "author": "Ahmed Ali Abdellatif <contact@3aai.in>",
+  "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://3aai.in",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/dawen.git"
+  },
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -20,5 +28,16 @@
   "devDependencies": {
     "fast-check": "^3.22.0",
     "vitest": "^2.1.8"
-  }
+  },
+  "keywords": [
+    "astro",
+    "blog",
+    "cms",
+    "decap",
+    "arabic",
+    "rtl",
+    "3aai",
+    "dawen",
+    "template"
+  ]
 }
