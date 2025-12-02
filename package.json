@@ -26,6 +26,7 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@astrojs/sitemap": "^3.6.0",
     "fast-check": "^3.22.0",
     "vitest": "^2.1.8"
   },
