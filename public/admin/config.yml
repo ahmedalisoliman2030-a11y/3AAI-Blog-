@@ -1,9 +1,10 @@
 # للاختبار المحلي (Development)
 local_backend: true
 
-# للإنتاج (Production) - Netlify Identity + Git Gateway
+# للإنتاج (Production) - GitHub Backend
 backend:
-  name: git-gateway
+  name: github
+  repo: ahmedalisoliman2030-a11y/3AAI-Blog-
   branch: main
 
 media_folder: "public/images/blog" # مجلد حفظ الصور
