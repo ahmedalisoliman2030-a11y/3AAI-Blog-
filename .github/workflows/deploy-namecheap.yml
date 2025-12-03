@@ -1,0 +1,42 @@
+name: Deploy Dawen to Namecheap
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📥 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 🟢 Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    # هذه الخطوة تأخذ الأسرار وتنشئ ملف config.php داخل مجلد public/oauth
+    # Astro سيقوم بنسخ هذا الملف تلقائياً إلى dist عند البناء
+    - name: 🔐 Create Auth Config File
+      run: |
+        mkdir -p public/oauth
+        echo "<?php" > public/oauth/config.php
+        echo "define('CLIENT_ID', '${{ secrets.OAUTH_CLIENT_ID }}');" >> public/oauth/config.php
+        echo "define('CLIENT_SECRET', '${{ secrets.OAUTH_CLIENT_SECRET }}');" >> public/oauth/config.php
+        echo "define('REDIRECT_URI', '${{ secrets.OAUTH_REDIRECT_URI }}');" >> public/oauth/config.php
+
+    - name: 🔨 Install & Build
+      run: |
+        npm install
+        npm run build
+
+    - name: 📂 Sync files to Namecheap
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./dist/
+        server-dir: /  # لأن حساب FTP موجه مباشرة لمجلد dawen.3aai.in
