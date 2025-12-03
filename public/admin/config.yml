@@ -1,5 +1,5 @@
 # للاختبار المحلي (Development)
-local_backend: true
+# local_backend: true # ⚠️ قم بإزالة التعليق هنا فقط عند التجربة المحلية (Local Development)
 
 # للإنتاج (Production) - GitHub Backend
 backend:

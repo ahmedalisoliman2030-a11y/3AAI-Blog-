@@ -17,7 +17,9 @@
     "astro": "astro",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "cms-proxy": "decap-server"
+    "cms-proxy": "decap-server",
+    "cms:local": "node scripts/enable-local-cms.js",
+    "cms:production": "node scripts/disable-local-cms.js"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
