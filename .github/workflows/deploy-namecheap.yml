@@ -17,8 +17,7 @@ jobs:
       with:
         node-version: '20'
 
-    # هذه الخطوة تأخذ الأسرار وتنشئ ملف config.php داخل مجلد public/oauth
-    # Astro سيقوم بنسخ هذا الملف تلقائياً إلى dist عند البناء
+    # توليد ملف الإعدادات السري
     - name: 🔐 Create Auth Config File
       run: |
         mkdir -p public/oauth
@@ -39,4 +38,9 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./dist/
-        server-dir: /  # لأن حساب FTP موجه مباشرة لمجلد dawen.3aai.in
+        server-dir: /
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          # ⚠️ تم حذف سطر استثناء oauth من هنا ليتم رفعه
