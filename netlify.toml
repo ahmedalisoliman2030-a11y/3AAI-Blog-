@@ -36,6 +36,6 @@
       style-src 'self' 'unsafe-inline';
       img-src 'self' data: blob: https:;
       font-src 'self' data:;
-      connect-src 'self' https://api.github.com blob:;
+      connect-src 'self' https://api.github.com blob: https://unpkg.com;
       frame-src 'self';
     """
