@@ -1,11 +1,14 @@
 ---
-title: "انشر مدونتك في دقائق مع Netlify"
-description: "دليل خطوة بخطوة لنشر مدونتك مجاناً على Netlify وتفعيل لوحة التحكم."
+title: انشر مدونتك في دقائق مع Netlify
+description: دليل خطوة بخطوة لنشر مدونتك مجاناً على Netlify وتفعيل لوحة التحكم.
 date: 2025-12-04
-author: "أحمد علي"
-image: "/images/blog/deploy-guide.png"
-category: "نشر"
-tags: ["Netlify", "Hosting", "Deployment"]
+author: أحمد علي
+image: /images/blog/deploydawen.jpg
+category: نشر
+tags:
+  - Netlify
+  - Hosting
+  - Deployment
 draft: false
 ---
 
