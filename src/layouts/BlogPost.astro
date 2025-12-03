@@ -1,10 +1,25 @@
 ---
 import Base from "./Base.astro";
-const { title, date, description } = Astro.props;
+import OptimizedImage from "../components/OptimizedImage.astro";
+
+const { title, date, description, image } = Astro.props;
 ---
 
 <Base>
   <article style="max-width: 700px; margin: 40px auto;">
+    {
+      image && (
+        <div style="margin-bottom: 2rem; border-radius: 1rem; overflow: hidden;">
+          <OptimizedImage
+            src={image}
+            alt={title}
+            width={800}
+            height={400}
+            loading="eager"
+          />
+        </div>
+      )
+    }
     <h1>{title}</h1>
     <p style="color: gray; margin-bottom: 20px;">📅 {date}</p>
 
