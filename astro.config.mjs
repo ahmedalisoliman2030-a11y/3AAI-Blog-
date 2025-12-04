@@ -15,8 +15,10 @@ export default defineConfig({
     react(), // دعم React Components
     sitemap(), // إنشاء خريطة الموقع تلقائياً (sitemap.xml)
     markdoc(), // دعم Markdoc (.mdoc files)
-    keystatic(), // نظام إدارة المحتوى (Keystatic CMS)
+    // تفعيل Keystatic فقط في بيئة التطوير المحلية
+    // في الإنتاج (GitHub Actions)، Keystatic غير مطلوب لأنه نظام محلي فقط
+    ...(process.env.NODE_ENV !== 'production' ? [keystatic()] : []),
   ],
 
-  output: 'static', // مطلوب لـ Keystatic
+  output: 'static', // بناء ثابت (Static Site Generation)
 });
