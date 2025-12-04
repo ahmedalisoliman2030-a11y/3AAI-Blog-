@@ -16,21 +16,19 @@
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest --run",
-    "test:watch": "vitest",
-    "cms-proxy": "decap-server",
-    "cms:local": "node scripts/enable-local-cms.js",
-    "cms:production": "node scripts/disable-local-cms.js"
+    "test:watch": "vitest"
   },
   "dependencies": {
+    "@astrojs/markdoc": "^0.15.9",
     "@astrojs/react": "^4.4.2",
+    "@keystatic/astro": "^5.0.0",
+    "@keystatic/core": "^0.5.0",
     "astro": "^5.15.8",
-    "decap-cms-app": "^3.9.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.6.0",
-    "decap-server": "^3.4.0",
     "fast-check": "^3.22.0",
     "vitest": "^2.1.8"
   },
@@ -38,7 +36,7 @@
     "astro",
     "blog",
     "cms",
-    "decap",
+    "keystatic",
     "arabic",
     "rtl",
     "3aai",

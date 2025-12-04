@@ -1,23 +1,13 @@
+import siteData from './site.json';
+
 export const siteConfig = {
-  title: '3AAI || Blog',
-  description: 'مدونة تقنية متخصصة في الذكاء الاصطناعي والتطوير البرمجي',
-  url: 'https://myblog.com',
-  author: {
-    name: 'اسم الكاتب',
-    bio: 'كاتب ومطور ويب متخصص في التقنيات الحديثة',
-    avatar: '/images/avatar.jpg',
-    email: 'author@myblog.com',
-  },
+  ...siteData,
   logo: {
     src: '/logo.png',
-    alt: 'شعار 3AAI Blog',
-    text: '3AAI || Blog',
+    alt: siteData.title,
+    text: siteData.title,
   },
-  social: [
-    { platform: 'twitter', url: 'https://twitter.com/myblog', icon: 'twitter' },
-    { platform: 'github', url: 'https://github.com/myblog', icon: 'github' },
-    { platform: 'linkedin', url: 'https://linkedin.com/in/myblog', icon: 'linkedin' },
-  ],
+  // Navigation and Footer remain hardcoded for now or can be moved to JSON later
   navigation: [
     { label: 'الرئيسية', href: '/' },
     { label: 'المقالات', href: '/blog' },
@@ -28,7 +18,7 @@ export const siteConfig = {
   footer: {
     about: {
       title: 'من نحن',
-      description: 'مدونة عربية متخصصة في تقديم محتوى تقني وثقافي عالي الجودة',
+      description: siteData.description,
     },
     links: [
       { label: 'من نحن', href: '/about' },

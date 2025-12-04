@@ -7,6 +7,8 @@ import { z, defineCollection } from "astro:content";
 const blogCollection = defineCollection({
   type: 'content', // نوع المحتوى: ملفات Markdown
   schema: z.object({
+    /** الرابط (Slug) - يطابق اسم الملف */
+    slug: z.string().optional(),
     /** عنوان المقال */
     title: z.string(),
     /** وصف مختصر للمقال (يظهر في البطاقات و SEO) */
