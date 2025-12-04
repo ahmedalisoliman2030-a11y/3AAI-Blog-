@@ -1,0 +1,39 @@
+name: Deploy Dawen to Namecheap
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📥 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 🟢 Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    # ❌ تم حذف خطوة توليد ملف الإعدادات (لأننا سنرفعه يدوياً)
+
+    - name: 🔨 Install & Build
+      run: |
+        npm install
+        npm run build
+
+    - name: 📂 Sync files to Namecheap
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./dist/
+        server-dir: /
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          oauth/** # ✅ عاد هذا السطر لحماية المجلد اليدوي من الحذف أو التعديل

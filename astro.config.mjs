@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   // رابط الموقع الرسمي (يستخدم لإنشاء sitemap و canonical URLs)
-  site: 'https://splendid-crumble-330ff8.netlify.app',
+  site: 'https://dawen.3aai.in',
 
   // التكاملات (Integrations)
   integrations: [

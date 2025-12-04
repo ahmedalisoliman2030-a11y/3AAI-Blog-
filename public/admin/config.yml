@@ -4,8 +4,10 @@
 # للإنتاج (Production) - GitHub Backend
 backend:
   name: github
-  repo: ahmedalisoliman2030-a11y/3AAI-Blog-
+  repo: ahmedalisoliman2030-a11y/dawen # اسم المستودع الخاص بك
   branch: main
+  base_url: https://dawen.3aai.in
+  auth_endpoint: oauth/ # هذا سيشير تلقائياً إلى index.php داخل المجلد
 
 media_folder: "public/images/blog" # مجلد حفظ الصور
 public_folder: "/images/blog" # المسار العام للصور

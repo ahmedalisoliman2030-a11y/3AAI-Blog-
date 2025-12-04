@@ -50,10 +50,7 @@ const fullTitle =
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.site)} />
 
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-    ></script>
-
+   
     <!-- Theme Script (runs before page load to prevent flash) -->
     <script is:inline>
       const theme = localStorage.getItem("theme") || "dark";
@@ -86,20 +83,6 @@ const fullTitle =
       document.addEventListener("astro:after-swap", initTheme);
     </script>
 
-    <!-- Netlify Identity Redirect Script -->
-    <script>
-      // @ts-ignore
-      if (window.netlifyIdentity) {
-        // @ts-ignore
-        window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            // @ts-ignore
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
+  
   </body>
 </html>
