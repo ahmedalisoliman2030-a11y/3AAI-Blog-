@@ -96,21 +96,21 @@ npm run dev
 ```
 
 الموقع سيعمل على: `http://localhost:4321`
+لوحة التحكم (Keystatic): `http://localhost:4321/keystatic`
 
 ### هيكل المشروع
 
 ```
 3aai-blog/
-├── public/              # الملفات الثابتة
-│   ├── admin/          # إعدادات Decap CMS
-│   └── images/         # الصور
+├── public/              # الملفات الثابتة والصور
 ├── src/
 │   ├── components/     # مكونات Astro/React
-│   ├── content/        # المحتوى (مقالات، إلخ)
+│   ├── content/        # المحتوى (يُدار بواسطة Keystatic)
 │   ├── layouts/        # قوالب الصفحات
 │   ├── pages/          # صفحات الموقع
 │   └── styles/         # ملفات CSS
 ├── astro.config.mjs    # إعدادات Astro
+├── keystatic.config.ts # إعدادات Keystatic
 └── package.json
 ```
 
