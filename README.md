@@ -29,17 +29,9 @@
 
 ### 🌐 معاينة حية (Live Demo)
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Dawen-blue?style=for-the-badge&logo=netlify)](https://dawen.3aai.in/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Dawen-blue?style=for-the-badge&logo=web)](https://dawen.3aai.in/)
 
 **[👉 شاهد المدونة الآن](https://dawen.3aai.in/)**
-
----
-
-### 🚀 أنشئ نسختك الخاصة بضغطة واحدة!
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/dawen)
-
-**الميزة:** ستحصل فوراً على نسخة كاملة من المدونة جاهزة للنشر!
 
 </div>
 
@@ -147,13 +139,13 @@
 
 ## 🚀 النشر
 
-### Netlify (موصى به) ⭐
+### الاستضافة التقليدية (cPanel/Hostinger) 
 
-1. اربط مستودع GitHub بـ Netlify.
-2. الإعدادات التلقائية ستعمل مباشرة (`npm run build`).
+1. نفذ أمر البناء: `npm run build`
+2. ارفع محتويات مجلد `dist` إلى الاستضافة الخاصة بك
 3. موقعك جاهز!
 
-راجع [دليل النشر الكامل](DEPLOYMENT.md) للتفاصيل.
+راجع [دليل النشر الكامل](DEPLOYMENT.md) للتفاصيل والخيارات الأخرى.
 
 ---
 

@@ -40,7 +40,7 @@
 
 1. **إزالة Decap CMS:**
    - حذف مجلد `public/admin`.
-   - إزالة سكريبتات Netlify Identity.
+
 
 2. **تثبيت Keystatic & Markdoc:**
    - إضافة `@keystatic/astro` و `@astrojs/markdoc`.
