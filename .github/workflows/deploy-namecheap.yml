@@ -24,6 +24,15 @@ jobs:
         npm install
         npm run build
 
+    - name: 📋 List dist contents (debug)
+      run: |
+        echo "=== Dist folder structure ==="
+        ls -la dist/
+        echo "=== Contact folder ==="
+        ls -la dist/contact/
+        echo "=== About folder ==="
+        ls -la dist/about/
+
     - name: 📂 Sync files to Namecheap
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
@@ -32,8 +41,8 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./dist/
         server-dir: /
+        dangerous-clean-slate: true # ⚠️ مؤقت - يحذف كل الملفات ويرفعها من جديد
         exclude: |
           **/.git*
           **/.git*/**
           **/node_modules/**
-          oauth/** # ✅ عاد هذا السطر لحماية المجلد اليدوي من الحذف أو التعديل
