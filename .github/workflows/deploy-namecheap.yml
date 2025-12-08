@@ -41,7 +41,7 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./dist/
         server-dir: /
-        dangerous-clean-slate: true # ⚠️ مؤقت - يحذف كل الملفات ويرفعها من جديد
+        log-level: verbose
         exclude: |
           **/.git*
           **/.git*/**
