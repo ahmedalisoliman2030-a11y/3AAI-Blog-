@@ -2,19 +2,26 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import { siteConfig } from "../config/site";
 
+// قراءة بيانات صفحة الاتصال من ملف JSON
+import contactData from "../content/contact/data.json";
+
 const socialLinks = [
     { name: "Twitter", url: siteConfig.social.twitter, icon: "twitter" },
     { name: "GitHub", url: siteConfig.social.github, icon: "github" },
     { name: "LinkedIn", url: siteConfig.social.linkedin, icon: "linkedin" },
 ];
+
+// استخراج البيانات من الملف
+const { pageTitle, pageSubtitle, contactInfo, formLabels, formSettings } =
+    contactData;
 ---
 
-<MainLayout title="اتصل بنا" description="تواصل معنا لأي استفسارات أو اقتراحات">
+<MainLayout title={pageTitle} description={pageSubtitle}>
     <div class="container">
         <div class="contact-header">
-            <h1>اتصل بنا</h1>
+            <h1>{pageTitle}</h1>
             <p class="subtitle">
-                نحن هنا للإجابة على استفساراتك. لا تتردد في التواصل معنا.
+                {pageSubtitle}
             </p>
         </div>
 
@@ -30,15 +37,29 @@ const socialLinks = [
 
                     <div class="info-item">
                         <span class="icon">📧</span>
-                        <a href="mailto:contact@3aai.blog" class="link"
-                            >contact@3aai.blog</a
+                        <a href={`mailto:${contactInfo.email}`} class="link"
+                            >{contactInfo.email}</a
                         >
                     </div>
 
                     <div class="info-item">
                         <span class="icon">📍</span>
-                        <span>الرياض، المملكة العربية السعودية</span>
+                        <span>{contactInfo.location}</span>
                     </div>
+
+                    {
+                        contactInfo.phone && (
+                            <div class="info-item">
+                                <span class="icon">📞</span>
+                                <a
+                                    href={`tel:${contactInfo.phone}`}
+                                    class="link"
+                                >
+                                    {contactInfo.phone}
+                                </a>
+                            </div>
+                        )
+                    }
                 </div>
 
                 <div class="social-links">
@@ -61,56 +82,73 @@ const socialLinks = [
             </div>
 
             <!-- Contact Form -->
-            <div class="contact-form-wrapper">
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">الاسم</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="اسمك الكريم"
-                            required
-                        />
-                    </div>
+            {
+                formSettings.showForm && (
+                    <div class="contact-form-wrapper">
+                        <form
+                            class="contact-form"
+                            action={formSettings.formAction || undefined}
+                            method={
+                                formSettings.formAction ? "POST" : undefined
+                            }
+                        >
+                            <div class="form-group">
+                                <label for="name">{formLabels.nameLabel}</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder={formLabels.namePlaceholder}
+                                    required
+                                />
+                            </div>
 
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="example@domain.com"
-                            required
-                        />
-                    </div>
+                            <div class="form-group">
+                                <label for="email">
+                                    {formLabels.emailLabel}
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder={formLabels.emailPlaceholder}
+                                    required
+                                />
+                            </div>
 
-                    <div class="form-group">
-                        <label for="subject">الموضوع</label>
-                        <input
-                            type="text"
-                            id="subject"
-                            name="subject"
-                            placeholder="موضوع الرسالة"
-                            required
-                        />
-                    </div>
+                            <div class="form-group">
+                                <label for="subject">
+                                    {formLabels.subjectLabel}
+                                </label>
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    name="subject"
+                                    placeholder={formLabels.subjectPlaceholder}
+                                    required
+                                />
+                            </div>
 
-                    <div class="form-group">
-                        <label for="message">الرسالة</label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            rows="5"
-                            placeholder="اكتب رسالتك هنا..."
-                            required></textarea>
-                    </div>
+                            <div class="form-group">
+                                <label for="message">
+                                    {formLabels.messageLabel}
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    placeholder={formLabels.messagePlaceholder}
+                                    required
+                                />
+                            </div>
 
-                    <button type="submit" class="submit-btn"
-                        >إرسال الرسالة</button
-                    >
-                </form>
-            </div>
+                            <button type="submit" class="submit-btn">
+                                {formLabels.submitButton}
+                            </button>
+                        </form>
+                    </div>
+                )
+            }
         </div>
     </div>
 </MainLayout>

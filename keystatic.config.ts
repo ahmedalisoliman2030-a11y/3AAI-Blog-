@@ -39,6 +39,64 @@ export default config({
                 }, { label: 'روابط التواصل الاجتماعي' }),
             },
         }),
+
+        contactPage: singleton({
+            label: 'صفحة اتصل بنا',
+            path: 'src/content/contact/data',
+            format: { data: 'json' },
+            schema: {
+                // عنوان الصفحة
+                pageTitle: fields.text({
+                    label: 'عنوان الصفحة',
+                    defaultValue: 'اتصل بنا',
+                }),
+                pageSubtitle: fields.text({
+                    label: 'النص التوضيحي',
+                    multiline: true,
+                    defaultValue: 'نحن هنا للإجابة على استفساراتك. لا تتردد في التواصل معنا.',
+                }),
+
+                // معلومات التواصل
+                contactInfo: fields.object({
+                    email: fields.text({
+                        label: 'البريد الإلكتروني',
+                        defaultValue: 'contact@example.com',
+                    }),
+                    location: fields.text({
+                        label: 'العنوان/الموقع',
+                        defaultValue: 'المملكة العربية السعودية',
+                    }),
+                    phone: fields.text({
+                        label: 'رقم الهاتف (اختياري)',
+                    }),
+                }, { label: 'معلومات التواصل' }),
+
+                // نصوص النموذج
+                formLabels: fields.object({
+                    nameLabel: fields.text({ label: 'حقل الاسم', defaultValue: 'الاسم' }),
+                    namePlaceholder: fields.text({ label: 'placeholder الاسم', defaultValue: 'اسمك الكريم' }),
+                    emailLabel: fields.text({ label: 'حقل البريد', defaultValue: 'البريد الإلكتروني' }),
+                    emailPlaceholder: fields.text({ label: 'placeholder البريد', defaultValue: 'example@domain.com' }),
+                    subjectLabel: fields.text({ label: 'حقل الموضوع', defaultValue: 'الموضوع' }),
+                    subjectPlaceholder: fields.text({ label: 'placeholder الموضوع', defaultValue: 'موضوع الرسالة' }),
+                    messageLabel: fields.text({ label: 'حقل الرسالة', defaultValue: 'الرسالة' }),
+                    messagePlaceholder: fields.text({ label: 'placeholder الرسالة', defaultValue: 'اكتب رسالتك هنا...' }),
+                    submitButton: fields.text({ label: 'نص زر الإرسال', defaultValue: 'إرسال الرسالة' }),
+                }, { label: 'نصوص النموذج' }),
+
+                // إعدادات النموذج
+                formSettings: fields.object({
+                    formAction: fields.text({
+                        label: 'رابط إرسال النموذج (مثل Formspree)',
+                        description: 'اتركه فارغاً إذا لم تُفعّل خدمة إرسال',
+                    }),
+                    showForm: fields.checkbox({
+                        label: 'إظهار النموذج؟',
+                        defaultValue: true,
+                    }),
+                }, { label: 'إعدادات النموذج' }),
+            },
+        }),
     },
 
     collections: {

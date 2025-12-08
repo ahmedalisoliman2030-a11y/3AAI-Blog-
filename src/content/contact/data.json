@@ -1,0 +1,22 @@
+{
+  "pageTitle": "اتصل بنا",
+  "pageSubtitle": "نحن هنا للإجابة على استفساراتك. لا تتردد في التواصل معنا.",
+  "contactInfo": {
+    "email": "support@3aai.in",
+    "location": "مصر القاهرة"
+  },
+  "formLabels": {
+    "nameLabel": "الاسم",
+    "namePlaceholder": "اسمك الكريم",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "example@domain.com",
+    "subjectLabel": "الموضوع",
+    "subjectPlaceholder": "موضوع الرسالة",
+    "messageLabel": "الرسالة",
+    "messagePlaceholder": "اكتب رسالتك هنا...",
+    "submitButton": "إرسال الرسالة"
+  },
+  "formSettings": {
+    "showForm": true
+  }
+}
