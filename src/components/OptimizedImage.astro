@@ -61,6 +61,9 @@ const webpSrc = src.replace(/\.(jpg|jpeg|png|gif)$/i, ".webp");
 {/* 
   نستخدم <picture> tag لدعم WebP مع fallback
   المتصفح يختار أفضل صيغة متاحة تلقائياً
+  
+  ملاحظة: في وضع التطوير (DEV)، نخفي مصدر WebP لأن الملفات لم يتم إنشاؤها بعد
+  (يتم إنشاؤها فقط عند الرفع لـ GitHub)
 */}
 {isExternal ? (
   <!-- الصور الخارجية: نستخدم img عادي -->
@@ -76,10 +79,12 @@ const webpSrc = src.replace(/\.(jpg|jpeg|png|gif)$/i, ".webp");
 ) : (
   <!-- الصور المحلية: نستخدم picture مع WebP -->
   <picture class:list={["optimized-picture", className]}>
-    <!-- WebP للمتصفحات الحديثة -->
-    <source srcset={webpSrc} type="image/webp" />
+    {/* WebP فقط في الإنتاج (بعد عمل GitHub Actions) */}
+    {!import.meta.env.DEV && (
+      <source srcset={webpSrc} type="image/webp" />
+    )}
     
-    <!-- الصيغة الأصلية كـ fallback -->
+    <!-- الصيغة الأصلية كـ fallback (تعمل دائماً محلياً وفي الإنتاج) -->
     <img
       src={src}
       alt={alt}
