@@ -1,39 +1,12 @@
 ---
-/**
- * مكون الصور المحسّنة (Optimized Image)
- * 
- * يستخدم <picture> tag لدعم WebP مع fallback:
- * - ✅ دعم صيغة WebP للمتصفحات الحديثة
- * - ✅ fallback للصيغة الأصلية للمتصفحات القديمة
- * - ✅ تحميل كسول (lazy loading)
- * - ✅ دعم responsive images
- * 
- * ملاحظة: يجب أن تكون نسخة WebP موجودة بجانب الصورة الأصلية
- * مثال: image.jpg + image.webp
- * 
- * الاستخدام:
- * ```astro
- * <OptimizedImage 
- *   src="/images/blog/my-image.jpg" 
- *   alt="وصف الصورة"
- *   width={800}
- *   height={400}
- * />
- * ```
- */
+import { isExternalImage, validateAltText } from "../utils/image";
 
 interface Props {
-  /** مسار الصورة (من مجلد public) */
   src: string;
-  /** النص البديل (مطلوب للوصولية) */
   alt: string;
-  /** العرض بالبكسل */
   width?: number;
-  /** الارتفاع بالبكسل */
   height?: number;
-  /** كلاسات CSS إضافية */
   class?: string;
-  /** نوع التحميل: lazy (افتراضي) أو eager */
   loading?: "lazy" | "eager";
 }
 
@@ -46,66 +19,21 @@ const {
   loading = "lazy",
 } = Astro.props;
 
-// تحذير إذا لم يكن هناك نص بديل
-if (!alt || alt.trim() === "") {
-  console.warn(`⚠️ تحذير: الصورة ${src} لا تحتوي على نص بديل (alt text)`);
+// التحقق من وجود نص بديل
+if (!validateAltText(alt)) {
+  console.warn(`تحذير: الصورة ${src} لا تحتوي على نص بديل (alt text)`);
 }
 
-// تحديد إذا كانت الصورة خارجية
-const isExternal = src.startsWith("http://") || src.startsWith("https://");
-
-// إنشاء رابط WebP من الصورة الأصلية
-const webpSrc = src.replace(/\.(jpg|jpeg|png|gif)$/i, ".webp");
+// تحديد ما إذا كانت الصورة محلية أو خارجية
+const isExternal = isExternalImage(src);
 ---
 
-{/* 
-  نستخدم <picture> tag لدعم WebP مع fallback
-  المتصفح يختار أفضل صيغة متاحة تلقائياً
-  
-  ملاحظة: في وضع التطوير (DEV)، نخفي مصدر WebP لأن الملفات لم يتم إنشاؤها بعد
-  (يتم إنشاؤها فقط عند الرفع لـ GitHub)
-*/}
-{isExternal ? (
-  <!-- الصور الخارجية: نستخدم img عادي -->
-  <img
-    src={src}
-    alt={alt}
-    width={width}
-    height={height}
-    class:list={[className, "optimized-image"]}
-    loading={loading}
-    decoding="async"
-  />
-) : (
-  <!-- الصور المحلية: نستخدم picture مع WebP -->
-  <picture class:list={["optimized-picture", className]}>
-    {/* WebP فقط في الإنتاج (بعد عمل GitHub Actions) */}
-    {!import.meta.env.DEV && (
-      <source srcset={webpSrc} type="image/webp" />
-    )}
-    
-    <!-- الصيغة الأصلية كـ fallback (تعمل دائماً محلياً وفي الإنتاج) -->
-    <img
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      loading={loading}
-      decoding="async"
-      fetchpriority={loading === "eager" ? "high" : "auto"}
-      class="optimized-image"
-    />
-  </picture>
-)}
-
-<style>
-  .optimized-picture {
-    display: block;
-  }
-  
-  .optimized-image {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-</style>
+<img
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  class={className}
+  loading={loading}
+  decoding="async"
+/>

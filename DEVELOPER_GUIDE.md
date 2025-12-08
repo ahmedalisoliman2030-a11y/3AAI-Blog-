@@ -269,41 +269,6 @@ npm run preview
 
 ---
 
-## 🖼️ نظام الصور الذكي (Smart Image System)
-
-المشروع يحتوي على نظام متكامل لتحسين الصور تلقائياً لضمان أفضل أداء:
-
-### 1. كيف يعمل؟
-
-1. **الرفع (GitHub):** عند رفع أي صورة (`.jpg`, `.png`)، يقوم GitHub Actions تلقائياً بإنشاء نسخة `.webp` بجانبها.
-2. **العرض (Astro):** نستخدم المكون `<OptimizedImage />` الذي يولد كود HTML ذكي (`<picture>`) يختار أفضل صيغة للمتصفح.
-
-### 2. المكون `OptimizedImage.astro`
-
-يقع في `src/components/OptimizedImage.astro`.
-
-**الاستخدام:**
-```astro
-import OptimizedImage from '../components/OptimizedImage.astro';
-
-<OptimizedImage 
-  src="/images/blog/my-photo.jpg" 
-  alt="صورة رائعة"
-  width={800}    
-  height={600}
-/>
-```
-
-**المخرجات (HTML):**
-```html
-<picture>
-  <source srcset="/images/blog/my-photo.webp" type="image/webp">
-  <img src="/images/blog/my-photo.jpg" alt="..." ...>
-</picture>
-```
-
----
-
 ## 📞 صفحة الاتصال ولوحة التحكم
 
 تم تحويل صفحة "اتصل بنا" لتكون قابلة للإدارة بالكامل من Keystatic CMS.
