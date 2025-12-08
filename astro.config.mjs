@@ -20,5 +20,27 @@ export default defineConfig({
     ...(process.env.NODE_ENV !== 'production' ? [keystatic()] : []),
   ],
 
+  // إعدادات الصور
+  image: {
+    // خدمة معالجة الصور (Sharp للتحويل والضغط)
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false, // لا حد لحجم الصورة
+      },
+    },
+    // النطاقات المسموح بها للصور الخارجية
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.githubusercontent.com',
+      },
+    ],
+  },
+
   output: 'static', // بناء ثابت (Static Site Generation)
 });

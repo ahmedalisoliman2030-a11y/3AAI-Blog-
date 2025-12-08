@@ -13,19 +13,26 @@
 ```
 /
 ├── keystatic.config.ts    # إعدادات Keystatic (Schema)
-├── astro.config.mjs       # إعدادات Astro (تكامل Keystatic & Markdoc)
+├── astro.config.mjs       # إعدادات Astro + Image optimization
 ├── src/
 │   ├── middleware/        # Security middleware
 │   │   └── index.ts       # رؤوس الأمان
 │   ├── content/           # المحتوى (يُدار بواسطة Keystatic)
 │   │   ├── blog/          # ملفات المقالات (.mdoc)
 │   │   ├── authors/       # ملفات المؤلفين (.mdoc)
+│   │   ├── contact/       # بيانات صفحة الاتصال (data.json) ⭐ جديد
 │   │   └── settings/      # إعدادات الموقع (.json/.yaml)
 │   ├── components/        # مكونات الواجهة (Astro/React)
+│   │   └── OptimizedImage.astro  # مكون الصور المحسّنة ⭐
 │   ├── layouts/           # تخطيطات الصفحات
 │   └── pages/             # مسارات الموقع (Routes)
+│       ├── contact.astro  # صفحة الاتصال (تقرأ من CMS)
 │       └── keystatic/     # مسار لوحة التحكم
-└── public/                # الملفات العامة والصور
+├── public/                # الملفات العامة والصور
+│   └── .htaccess          # إعدادات Apache للاستضافة التقليدية
+└── .github/workflows/     # GitHub Actions
+    ├── deploy-namecheap.yml    # نشر تلقائي عبر FTP
+    └── compress-images.yml     # ضغط الصور وتحويلها لـ WebP
 ```
 
 ---
@@ -252,6 +259,70 @@ npm run preview
 - [Google PageSpeed Insights](https://pagespeed.web.dev/)
 - [GTmetrix](https://gtmetrix.com/)
 - Lighthouse في Chrome DevTools
+
+### قياس الأداء
+
+استخدم أدوات مثل:
+- [Google PageSpeed Insights](https://pagespeed.web.dev/)
+- [GTmetrix](https://gtmetrix.com/)
+- Lighthouse في Chrome DevTools
+
+---
+
+## 🖼️ نظام الصور الذكي (Smart Image System)
+
+المشروع يحتوي على نظام متكامل لتحسين الصور تلقائياً لضمان أفضل أداء:
+
+### 1. كيف يعمل؟
+
+1. **الرفع (GitHub):** عند رفع أي صورة (`.jpg`, `.png`)، يقوم GitHub Actions تلقائياً بإنشاء نسخة `.webp` بجانبها.
+2. **العرض (Astro):** نستخدم المكون `<OptimizedImage />` الذي يولد كود HTML ذكي (`<picture>`) يختار أفضل صيغة للمتصفح.
+
+### 2. المكون `OptimizedImage.astro`
+
+يقع في `src/components/OptimizedImage.astro`.
+
+**الاستخدام:**
+```astro
+import OptimizedImage from '../components/OptimizedImage.astro';
+
+<OptimizedImage 
+  src="/images/blog/my-photo.jpg" 
+  alt="صورة رائعة"
+  width={800}    
+  height={600}
+/>
+```
+
+**المخرجات (HTML):**
+```html
+<picture>
+  <source srcset="/images/blog/my-photo.webp" type="image/webp">
+  <img src="/images/blog/my-photo.jpg" alt="..." ...>
+</picture>
+```
+
+---
+
+## 📞 صفحة الاتصال ولوحة التحكم
+
+تم تحويل صفحة "اتصل بنا" لتكون قابلة للإدارة بالكامل من Keystatic CMS.
+
+### 1. هيكل البيانات
+
+- **المصدر:** `src/content/contact/data.json`
+- **Keystatic Config:** تم تعريف Singleton باسم `contactPage`.
+
+### 2. كيف نقرأ البيانات؟
+
+نقرأ ملف JSON مباشرة في `src/pages/contact.astro`:
+
+```javascript
+import contactData from "../content/contact/data.json";
+const { pageTitle, contactInfo } = contactData;
+```
+
+هذا الأسلوب يوفر أداءً عالياً جداً (Zero Runtime Overhead) لأن البيانات تُدمج أثناء البناء.
 
 ---
 
