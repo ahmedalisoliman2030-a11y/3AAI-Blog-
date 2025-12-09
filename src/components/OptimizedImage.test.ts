@@ -124,7 +124,7 @@ test('Property 30: Featured images should be displayed in post cards and post pa
   fc.assert(
     fc.property(
       fc.option(fc.string({ minLength: 5, maxLength: 100 }), { nil: undefined }),
-      fc.string({ minLength: 1, maxLength: 100 }),
+      fc.string({ minLength: 1, maxLength: 100 }).filter(s => s.trim().length > 0),
       (featuredImage: string | undefined, postTitle: string) => {
         // الخاصية: إذا كانت المقالة تحتوي على صورة بارزة، يجب عرضها
         

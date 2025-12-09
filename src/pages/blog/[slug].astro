@@ -7,6 +7,7 @@ import {
   formatReadingTime,
 } from "../../utils/reading-time";
 import OptimizedImage from "../../components/OptimizedImage.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -23,7 +24,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const readingTime = calculateReadingTime(post.body);
 
@@ -93,8 +94,16 @@ const relatedPosts = allPosts
         }
       </div>
 
-      <div class="post-content content-container">
-        <Content />
+      <div class="post-layout">
+        <div class="post-content content-container">
+          <Content />
+        </div>
+        
+        {headings.length >= 3 && (
+          <aside class="post-sidebar">
+            <TableOfContents headings={headings} />
+          </aside>
+        )}
       </div>
 
       {
@@ -233,11 +242,22 @@ const relatedPosts = allPosts
     border-color: var(--color-primary);
   }
 
+  .post-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
   .post-content {
     font-size: 1.125rem;
     line-height: 1.8;
     color: var(--color-text);
-    margin-bottom: 3rem;
+    min-width: 0; /* لمنع overflow */
+  }
+
+  .post-sidebar {
+    display: block;
   }
 
   .post-content :global(h2) {
@@ -353,6 +373,16 @@ const relatedPosts = allPosts
     color: var(--color-text-secondary);
     font-size: 0.875rem;
     line-height: 1.6;
+  }
+
+  @media (max-width: 1200px) {
+    .post-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .post-sidebar {
+      order: -1; /* عرض جدول المحتويات في الأعلى على الشاشات الصغيرة */
+    }
   }
 
   @media (max-width: 768px) {

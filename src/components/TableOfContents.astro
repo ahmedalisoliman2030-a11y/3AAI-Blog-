@@ -1,0 +1,175 @@
+---
+/**
+ * مكون جدول المحتويات (Table of Contents)
+ * يعرض قائمة تفاعلية بعناوين المقالة للتنقل السريع
+ */
+
+interface Props {
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+}
+
+const { headings } = Astro.props;
+
+// تصفية العناوين (فقط h2 و h3)
+const filteredHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+
+// إخفاء جدول المحتويات إذا كان عدد العناوين أقل من 3
+if (filteredHeadings.length < 3) {
+  return null;
+}
+---
+
+<nav class="toc" aria-label="جدول المحتويات">
+  <div class="toc-header">
+    <h2 class="toc-title">محتويات المقالة</h2>
+  </div>
+  <ul class="toc-list">
+    {filteredHeadings.map((heading) => (
+      <li class={`toc-item toc-depth-${heading.depth}`}>
+        <a href={`#${heading.slug}`} class="toc-link">
+          {heading.text}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .toc {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    max-height: calc(100vh - var(--header-height) - 4rem);
+    overflow-y: auto;
+    transition: all var(--transition-normal);
+  }
+
+  .toc-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .toc-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .toc-depth-2 {
+    padding-right: 0;
+  }
+
+  .toc-depth-3 {
+    padding-right: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .toc-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    line-height: 1.4;
+  }
+
+  .toc-link:hover {
+    color: var(--color-primary);
+    background: var(--color-surface-hover);
+  }
+
+  .toc-link.active {
+    color: var(--color-primary);
+    background: var(--color-surface-hover);
+    font-weight: 600;
+  }
+
+  /* Scrollbar styling */
+  .toc::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .toc::-webkit-scrollbar-track {
+    background: var(--color-surface);
+  }
+
+  .toc::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+  }
+
+  .toc::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+  }
+
+  @media (max-width: 1200px) {
+    .toc {
+      position: relative;
+      top: 0;
+      margin-bottom: 2rem;
+      max-height: none;
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer لتحديد العنوان النشط
+  function initTableOfContents() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2, article h3');
+
+    if (!tocLinks.length || !headings.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('id');
+          const tocLink = document.querySelector(`.toc-link[href="#${id}"]`);
+
+          if (entry.isIntersecting) {
+            // إزالة active من جميع الروابط
+            tocLinks.forEach(link => link.classList.remove('active'));
+            // إضافة active للرابط الحالي
+            if (tocLink) {
+              tocLink.classList.add('active');
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '-100px 0px -66%',
+        threshold: 1.0,
+      }
+    );
+
+    headings.forEach((heading) => {
+      observer.observe(heading);
+    });
+  }
+
+  // تشغيل عند تحميل الصفحة
+  document.addEventListener('DOMContentLoaded', initTableOfContents);
+
+  // إعادة التشغيل بعد التنقل (للـ view transitions)
+  document.addEventListener('astro:after-swap', initTableOfContents);
+</script>

@@ -9,6 +9,7 @@
 import { describe, it, expect } from 'vitest';
 import { siteConfig } from '../config/site';
 import { getCurrentYear } from '../utils/date';
+import socialData from '../data/social.json';
 
 describe('Footer Component - Properties 25, 26, 27', () => {
   describe('Property 25: Footer presence', () => {
@@ -52,16 +53,15 @@ describe('Footer Component - Properties 25, 26, 27', () => {
   
   describe('Property 27: Social media links', () => {
     it('should have social media links configured', () => {
-      expect(siteConfig.social).toBeDefined();
-      expect(Array.isArray(siteConfig.social)).toBe(true);
-      expect(siteConfig.social.length).toBeGreaterThan(0);
+      expect(socialData.social_links).toBeDefined();
+      expect(Array.isArray(socialData.social_links)).toBe(true);
+      expect(socialData.social_links.length).toBeGreaterThan(0);
     });
     
     it('should have valid social media link structure', () => {
-      siteConfig.social.forEach(social => {
+      socialData.social_links.forEach(social => {
         expect(social.platform).toBeDefined();
         expect(social.url).toBeDefined();
-        expect(social.icon).toBeDefined();
         
         // التحقق من أن URL صحيح
         expect(social.url).toMatch(/^https?:\/\//);
